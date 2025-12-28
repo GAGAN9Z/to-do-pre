@@ -90,11 +90,12 @@ formElement.addEventListener('submit', function(event) { // обработчик
     event.preventDefault(); // предотвращаем перезагрузку страницы
     
     const taskText = inputElement.value.trim(); // получаем значение из ввода и удаляем лишние пробелы
+    if (taskText){ // проверка на НЕ пустое поле                                                                                                        НОВОЕ
+        const newItem = createItem(taskText); // создаём новый эл-нт списка
+        listElement.prepend(newItem); /// добавляем этот эл-нт в начало списка
+        const currItems = getTasksFromDOM(); // обновляем массив из DOM
+        saveTasks(currItems); // сохраняем обновлённый список задач
+        inputElement.value = ''; // очищаем ввод
+    }
     
-    const newItem = createItem(taskText); // создаём новый эл-нт списка
-    listElement.prepend(newItem); /// добавляем этот эл-нт в начало списка
-    const currItems = getTasksFromDOM(); // обновляем массив из DOM
-    saveTasks(currItems); // сохраняем обновлённый список задач
-
-    inputElement.value = ''; // очищаем ввод
 });
